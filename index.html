@@ -1,0 +1,81 @@
+<html>
+<head>
+	<title>Test</title>
+	<script src="js/jquery-1.11.0.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap/css/bootstrap.css"/>
+	<script type="text/javascript" src="bootstrap/js/bootstrap.js"></script>
+	<script type="text/javascript" src="js/skripta.js"></script>
+	<style>
+	  	.affix {
+	      	top: 0;
+	    	  width: 100%;
+	  	}
+
+	  	.affix + .container-fluid {
+	      padding-top: 70px;
+	  	}
+	  	.redText {
+	  		color: red;
+	  	}
+	</style>
+</head>
+<body>
+<nav class="navbar navbar-inverse" data-spy="affix" data-offset-top="197">
+<div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Test</a>
+    </div>
+  <ul class="nav navbar-nav">
+    <li class="active"><a href="#">Forma</a></li>
+    <li><a href="ts.html">TypeScript</a></li>
+  </ul>
+	</nav>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4 col-md-offset-4">
+				<form role="form" action="ts.html" onsubmit="return validiraj(this)">
+		  			<div class="form-group">
+		    			<label for="nzv">Naziv:</label>
+		    			<input type="text" name="naziv" class="form-control" id="nzv">
+		  			</div>
+		  			<div class="form-group">
+		    			<label for="drz">Država:</label>
+		    			<input type="text" name="drzava" class="form-control" id="drz">
+		  			</div>
+		  			<div class="form-group">
+		    			<label for="cena">Cena:</label>
+		    			<input type="number" name="cena" class="form-control" id="cena">
+		  			</div>
+		  			<div class="form-group">
+		    			<label for="varijanta">Varijanta:</label>
+		    			<select class = "form-control" name="varijanta" onchange="promenaVarijante(this)">
+		    				<option value="">Izaberite opciju...</option>
+					  		<option value="crveno">Crveno</option>
+					  		<option value="belo">Belo</option>
+						</select>
+		  			</div>
+		  			<div class="form-group">
+		    			<label for="sorta">Sorta grožđa:</label>
+		    			<select class = "form-control" name="sorta">
+					  		<option value="Prazno"></option>
+					  		<option value="Prokupac">Prokupac</option>
+					  		<option value="Cabernet Sauvignon">Cabernet Sauvignon</option>
+					  		<option value="Sauvignon blanc">Sauvignon blanc</option>
+						</select>
+		  			</div>
+		  					  			
+		  			<button type="submit" class="btn btn-default col-md-4 pull-right">Submit</button>
+				</form>
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="text-center bg-primary">
+				<p id="select_sorta">
+				    U selectu Sorta grožđa molimo odaberite : <span></span> <!-- Po potrebi slobodno dodati id u span.. -->
+				</p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

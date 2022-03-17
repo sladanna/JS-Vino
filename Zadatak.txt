@@ -1,0 +1,120 @@
+﻿FED Kurs: Parcijalni test
+----------------------------------------------------------------------------------------------------------------------
+ZADATAK:
+	index.html: (Kod pisati u fajlu skripta.js: ./js/skripta.js)
+		--------------
+			Izvršiti validaciju forme upotreboj JavaScript tehnologije.	
+			Sva polja u formi moraju biti unešena kako bi se forma submitovala.
+			Polje Cena mora da bude pozitivan broj.
+			
+			Vrednost polja Varijanta ima dve opcije: Crveno ili Belo
+			Prilikom menjanja opcija selecta, paragraf select_sorta koji inicijalno ima vrednost:
+			"U selectu Sorta grožđa molimo odaberite : "
+			dopuniti sa podacima iz objekta "upozorenje" koji je dat u skripta.js fajlu.
+
+			Tako da ako se u prvom selectu odabere Crno u pomenutom paragrafu trebao bi da bude ispis:
+			"U selectu Sorta grožđa molimo odaberite : Prokupac, Cabernet Sauvignon"
+
+			ili ako je odabrano Belo, u istom tom paragrafu treba da pise:
+			"U selectu Sorta grožđa molimo odaberite : Sauvignon blanc"
+
+			Objekat koji sadrzi poruke upozorenja definisan je na sledeći način:
+			var upozorenje = {
+				crveno: ["Prokupac", "Cabernet Sauvignon"],
+				belo: "Sauvignon blanc"
+			};
+
+			Prilikom submita forme proveriti i da li se vrednosti u selectima poklapaju.
+			Naime, ako je u selectu Varijanta odabrano "Crveno" u selectu Sorta grožđa 
+			mora biti odabran ili Prokupac ili Cabernet Sauvignon.
+			Ukoliko je u selectu Nacin placanja odabrano "Belo" u selectu Sorta grožđa
+			mora biti odabran Sauvignon blanc.
+			Forma se ne moze submitovati ukoliko se pomenute vrednosti ne poklapaju.
+
+			Napredno
+			---------------------
+			Onemogućiti submit forme ako uneti Naziv i Država se ne poklapaju sa jednim od predfinisanih vina.
+			var vina = [{naziv: "Svb Rosa", drzava: "Srbija"}, {naziv: "Port", drzava: "Portugal"}, 
+					{naziv: "Dom", drzava:"Francuska"}];
+
+	
+ts.html (Kod pisati u fajl proba.ts (./ts/proba.ts))
+		--------------
+			NAPOMENA: U ts.html izbrisati sledeci script tag: <script src="js/kriptovano.js"></script>
+
+			Prilikom ucitavanja stranice ts.html ucitavaju se predefinisane vinoteke (fajl ./js/vinoteke.js) i prva vinoteka se postavlja u objekat aktivna vinoteka.
+
+			Stranica ts.html sastoji se od select polja koje za izbor aktivne vinoteke, (select polje sadrzi ucitane vinoteke). Ispod select polja za izbor aktivne vinoteke, se nalaze 3 polja za unos vina. U polja je predvidjeno da se upise naziv i cena vina i da se izabere varijanta vina (varijanta moze biti: Crno, Belo ili Rose), a klikom na dugme "Dodaj vino", to vino se dodaje u niz vina aktivne vinoteke. Sva vina aktivne vinoteke su ispisana pomocu diva dinva.
+
+			Pored dugmeta "Dodaj vino", se nalaze dva dugmeta: "Najzastupljenija Varijanta" i "Najskuplja Varijanta".
+			Klikom na dugme  "Najzastupljenija Varijanta" u divu sa idom "varijante" se ispisuje:
+			
+			<h3>Najzastupljenija varijanta za vinoteku ${nazivAktivneVinoteke} je: <br/>                            ${najzastupljenijaVarijantaAktivneVinoteke} sa ukupno kupljenih ${brojKupljenihVinaTeVarijante} vina.</h3>
+
+			Najzastupljenija Varijanta je varijanta za koju vinoteka ima najvise vina. Odnosno, varijanta koja se najcesce pojavljuje u nizu vina za datu vinoteku.
+
+			Klikom na dugme  "Najskuplja Varijanta" u divu sa idom "varijante" se ispisuje:
+			
+			<h3>Najskuplja varijanta u vinoteci ${nazivAktivneVinoteke} je: <br/> ${varijantaSaNajvisomSumomCena} sa prosecnom cenom po vinu: ${prosecnaCenaVinaZaDatuVarijantu}.</h3>;
+			
+			Najskuplja varijanta za vinoteku je varijanta cije je ukupna suma cena najveca. Odnosno, varijanta cija suma vina iz niza vina je najveca.
+
+			Implementirati klasu Vino, koja se sastoji od:
+				-atributa:
+					naziv: string;
+    				cena: number;
+    				varijanta: string;
+				-konstruktora
+
+    		Implementirati klasu Vinoteka, koja se sastoji od:
+				-atributa:
+					private _id: number;
+					private _naziv: string;
+			    	private _vina: Vino[]; //Niz vina koje vinoteka prodaje
+				-konstruktora (prima sve atribute osim niza vina, niz vina treba da bude prazan niz inicijalno)
+				-geteri za sva polja
+				-seteri za sva polja (osim _proizvodi)
+			    -metoda:
+			    	-dodajVino //prima objekat klase Vino i dodaje ga u niz proizvoda
+			    	-najzastupljenijaVarijanta //Sluzi za pronalazenje najzastupljenije varijante i ispis odgovarajuceg teksta na html (tip void, preporuka za implementaciju: od niza vina, napraviti podniz (uz pomoc filter funkcije) za svaku varijantu (3 niza, po jedan za svaku varijantu) i onda vrsiti provere)
+			    	-najskupljaVarijanta //Sluzi za pronalazenje najskuplje varijante i ispis odgovarajuceg teksta na html (tip void, preporuka za implementaciju: od niza vina, napraviti podniz (uz pomoc filter funkcije) za svaku varijantu (3 razlicita niza) i onda vrsiti provere)
+
+			Implmentiraju funkciju refreshIspis koja u div sa idom "vina" ispisuje ul listu koja sadrzi svaki od vina aktivnoe vinoteke u svom li tagu, primer izgleda liste: 
+			
+			<div id="vina">
+				<ul class="list-group">
+					<li class="list-group-item">Cabernet Sauvignon (Crno) <span class="badge">1300</span></li>
+					<li class="list-group-item">Pinot Noir (Crno) <span class="badge">1230</span></li>
+					<li class="list-group-item">Sauvignon blanc (Belo) <span class="badge">2000</span></li>
+					<li class="list-group-item">Mouton Cadet (Belo) <span class="badge">1350</span></li>
+					<li class="list-group-item">Casal Mendes (Rose) <span class="badge">1250</span></li>
+					<li class="list-group-item">Cipresseto rosato (Rose) <span class="badge">1850</span></li>
+				</ul>
+			</div>
+
+			Implementirati funkciju wireEvents koja povezuje klik dogadjaje sa dugmicima:
+				-za dodajVino: kupe se informacije o vinu iz odgvarajucih input/select polja i pravi se novi objekat klase Vino, novi objekat se dodaje u aktivnog kupca
+				u okviru ovog callbacka pozvati funkciju refreshIspis
+				-za najzastupljenijaVarijanta: poziva se metoda najzastupljenijaVarijanta aktivnog kupca
+				-za najskupljaVarijanta: poziva se metoda najskupljaVarijanta aktivnog kupca
+   
+
+			Napredno
+			------------------------------------
+			Prilikom ispisa najzastupljenije ili najskuplje varijante, ukoliko vinoteka nema u prodaji vina ispisati poruku: 
+			<h3>Vinoteka ${nazivAktivneVinoteke} jos uvek nema vina za prodaju!<h3>
+
+			Implementirati dve dodatne metode u klasi Vinoteka:
+			-getNajskuplji(): Vino - Vraca najskuplje vino u nizu vina
+			-getNajjeftniji(): Vino - Vraca najjeftinije vino u nizu vina
+			Za pronalazenje proizvoda (najskuplji/najjeftniji) koristiti reduce funkciju!
+			Izmeniti funkciju refreshIspis tako da ukoliko se ispisuje najskuplji proizvod, odgovarajuci <li> tag treba da ima dodatnu klasu list-group-item-danger odnosno:
+
+			<li class="list-group-item list-group-item-danger">Sauvignon blanc (Belo) <span class="badge">2000</span></li>
+
+			A najjeftniji treba da ima dodatnu klasu list-group-item-success:
+			<li class="list-group-item list-group-item-success">Pinot Noir (Crno) <span class="badge">230</span></li>
+
+			
+
+			
